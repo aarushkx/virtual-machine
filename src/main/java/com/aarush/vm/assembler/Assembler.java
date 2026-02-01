@@ -9,23 +9,60 @@ import java.util.Map;
 
 import static com.aarush.vm.architecture.Architecture.OPS;
 import static com.aarush.vm.architecture.Architecture.OP_SHIFT;
+import static com.aarush.vm.architecture.Architecture.RAM_SIZE;
 
 public class Assembler {
 
+    private static final String DIVIDER = ".data";
+
     public String assemble(List<String> lines) {
         lines = getLines(lines);
-        Map<String, Integer> labels = findLabels(lines);
+
+        List<String> toCompile = new ArrayList<>();
+        List<String> toAllocate = new ArrayList<>();
+
+        boolean inDataSection = false;
+
+        for (String line : lines) {
+            if (line.equals(DIVIDER)) {
+                inDataSection = true;
+                continue;
+            }
+            if (inDataSection) toAllocate.add(line);
+            else toCompile.add(line);
+        }
+
+        Map<String, Integer> labels = findLabels(toCompile);
 
         List<String> instructions = new ArrayList<>();
-        for (String line : lines) {
+        for (String line : toCompile) {
             if (!isLabel(line)) instructions.add(line);
         }
+
+        int baseOfData = instructions.size();
+        addAllocations(baseOfData, labels, toAllocate);
 
         List<Integer> compiled = new ArrayList<>();
         for (String instruction : instructions) {
             compiled.add(compile(instruction, labels));
         }
         return generateProgramText(compiled);
+    }
+
+    private void addAllocations(int baseOfData, Map<String, Integer> labels, List<String> toAllocate) {
+        for (String alloc : toAllocate) {
+            String[] parts = alloc.split(":");
+            if (parts.length != 2)
+                throw new RuntimeException("Invalid allocation directive: " + alloc);
+            String label = parts[0].trim();
+            int numWords = Integer.parseInt(parts[1].trim());
+            if (labels.containsKey(label))
+                throw new RuntimeException("Duplicate label: " + label);
+            if (baseOfData + numWords > RAM_SIZE)
+                throw new RuntimeException("Allocation exceeds RAM size of " + RAM_SIZE + " words");
+            labels.put(label, baseOfData);
+            baseOfData += numWords;
+        }
     }
 
     private List<String> getLines(List<String> lines) {

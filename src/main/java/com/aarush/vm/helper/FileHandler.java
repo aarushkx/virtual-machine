@@ -36,4 +36,16 @@ public class FileHandler {
 
         System.out.println("Output written to: " + outputFile.toAbsolutePath());
     }
+
+    public static List<Integer> loadOutputMachineCode(String fileName) throws IOException {
+        Path file = Path.of("output").resolve(fileName);
+        List<String> lines = Files.readAllLines(file);
+        List<Integer> program = new ArrayList<>();
+        for (String line : lines) {
+            if (!line.isBlank()) {
+                program.add(Integer.parseInt(line.trim()));
+            }
+        }
+        return program;
+    }
 }
