@@ -21,7 +21,8 @@ public class Architecture {
             Map.entry("je", new Instruction(0x8, "rv")),    // Jump if equal
             Map.entry("jne", new Instruction(0x9, "rv")),   // Jump if not equal
             Map.entry("prr", new Instruction(0xA, "r-")),   // Print register
-            Map.entry("prm", new Instruction(0xB, "r-"))    // Print memory
+            Map.entry("prm", new Instruction(0xB, "r-")),   // Print memory
+            Map.entry("prc", new Instruction(0xC, "r-"))    // Print character
     );
 
     public static final int OP_MASK = 0xFF; // Used to extract the lowest 8 bits (1 byte)

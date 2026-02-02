@@ -9,7 +9,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        String asmFileName = "test3";
+        String asmFileName = "test4";
         List<String> lines = FileHandler.loadTestResource(asmFileName + ".asm");
 
         Assembler assembler = new Assembler();

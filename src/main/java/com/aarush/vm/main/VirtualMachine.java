@@ -78,6 +78,7 @@ public class VirtualMachine {
             else if (opcode == OPS.get("jne").opcode()) ip = regs[arg0] != 0 ? arg1 : ip;
             else if (opcode == OPS.get("prr").opcode()) System.out.println(regs[arg0]);
             else if (opcode == OPS.get("prm").opcode()) System.out.println(ram[regs[arg0]]);
+            else if (opcode == OPS.get("prc").opcode()) System.out.print((char) regs[arg0]);
             else throw new RuntimeException("Unknown opcode: " + opcode);
         }
     }
