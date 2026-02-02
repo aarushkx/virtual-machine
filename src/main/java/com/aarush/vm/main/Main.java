@@ -9,6 +9,11 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        /*
+         * To run a program:
+         * 1. Write your assembly code (.asm) in the appropriate resources folder (src/main/resources/test)
+         * 2. Change the 'asmFileName' variable below to match your file name (without extension)
+         */
         String asmFileName = "test4";
         List<String> lines = FileHandler.loadTestResource(asmFileName + ".asm");
 

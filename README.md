@@ -67,6 +67,19 @@ This VM consists of:
 4. The VM repeatedly reads the next instruction from memory, decodes its opcode and operands, and executes the
    corresponding operation until it encounters a halt instruction
 
+## How to Run
+
+To write and execute your own programs on this VM:
+
+1. **Write Assembly Code**: Create a new `.asm` file in the `src/main/resources/test` folder
+2. **Configure the Main Class**: Open `src/main/java/com/aarush/vm/main/Main.java`
+3. **Update Filename**: Change the `asmFileName` variable to match your file name (without the `.asm` extension).
+   ```java
+   String asmFileName = "your_file_name";
+4. **Run**: Execute the Main.main() method. The assembler will generate a .o object file in the `output` directory, and
+   the VM will execute the
+   machine code automatically.
+
 ## Acknowledgement
 
 This project was inspired by and extended from the architectural concepts explained
