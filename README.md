@@ -1,9 +1,10 @@
 # 🖥️ Virtual Machine
 
-This project implements a register-based Virtual Machine (VM) in Java, along with a custom Instruction Set
-Architecture (ISA) and a two-pass assembler. The system models a simplified CPU architecture using a unified memory
-design and demonstrates the full compilation and execution pipeline from assembly source code to machine-level
-execution.
+This project implements a Virtual Machine built in Java that realizes the execution of programs at the machine level.
+
+It includes a custom Instruction Set Architecture (ISA) and a two-pass assembler, forming a complete pipeline from
+assembly source code to executable machine instructions. The VM simulates core CPU behavior, including memory
+management, instruction encoding, branching, and fetch–decode–execute cycle.
 
 ## Overview
 
@@ -82,5 +83,5 @@ To write and execute your own programs on this VM:
 
 ## Acknowledgement
 
-This project was inspired by and extended from the architectural concepts explained
+This project was reimplemented in Java and extended from the architectural concepts explained
 in  [Software Design by Example](https://third-bit.com/sdxjs/) by Greg Wilson.
